@@ -1,33 +1,33 @@
 # iDeploy
 
-* [1.简介](#desc)
+* [1.Introduction](#desc)
 
-* [2.项目技术栈](#tech)
+* [2.Project Technology Stack](#tech)
 
-* [3.快速启动](#quickstart)
+* [3.Quick Start](#quickstart)
 
-* [4.部署第一个项目](#firstpro)
+* [4.Deploy the first project](#firstpro)
 
-* [5.多语言支持](#morelang)
+* [5.Multilingual Support](#morelang)
 
-* [6.编写插件支持高级功能](#advanced)
+* [6.Write plugins to support advanced features](#advanced)
 
 
 
 
 
 <span id="desc"></span>
-## 简介
+## Introduction
 
 
 <p>
-ideploy是为前端团队构建部署工程化而开发的一个持续交付平台.我们根据团队人员，项目增长而面临的越来越多在构建，交付等日常工作中的痛点，设计了很多特有而简单易用的功能，节省了团队很多构建部署的协调和copy体力工作，极大的提升了团队的开发效率。随着功能的完善，觉得这个系统可以帮助很多类似我们这样成长中的前端团队（当然系统其实也是支持java,php等项目的部署的，通过插件编写也可以支持go甚至更多语言的构建部署）实现快速构建，快速部署，放心上线。
+Ideploy is a continuous delivery platform developed for the construction and deployment engineering of the front-end team. We have designed many unique and easy-to-use platforms based on the pain points faced by team members and project growth in daily work such as construction and delivery. The function saves the team a lot of coordination and copy manual work for construction and deployment, and greatly improves the development efficiency of the team. With the improvement of functions, I feel that this system can help many growing front-end teams like us (of course, the system actually supports the deployment of java, php and other projects, and it can also support the construction and deployment of go or even more languages through plug-in writing) Realize rapid construction, rapid deployment, and go online with confidence.
 </p>
 
 
 
 <span id="tech"></span>
-## 技术栈
+## Technology Stack
 
  1.  开发语言： [nodejs](http://nodejs.org/ "nodejs") 
  
@@ -40,7 +40,7 @@ ideploy是为前端团队构建部署工程化而开发的一个持续交付平�
  5. 前端ui框架  [ant.design](https://ant.design) 
 
 <span id="quickstart"></span>
-## 快速启动(只支持linux)
+## Quick start (only supports linux)
 1. git clone xxxxx.git 代码到本地
 2. 安装nodejs 依赖:在根目录下运行npm install
 3. 安装ansible （依赖ansible做部署前后的命令行执行）
@@ -138,7 +138,7 @@ export default {
 	
 	
 <span id="firstpro"></span>
-## 构建部署第一个项目
+## Build and deploy the first project
 
 1. 注册系统用户
    第一次进入系统会直接跳到登录页，如果没有注册过则点击底部注册链接进行填写用户名密码进行注册，如果注册过则登录即可
@@ -253,7 +253,7 @@ export default {
   	
 
 <span id="morelang"></span>
-## 支持多语言构建部署：
+## Support multi-language build deployment:
       
  <p>
 这个项目本来是为了前端构建部署而设计的，但是随着系统的日益完善，我们也支持其他语言如   java项目的构建和部署，接下来我们来看看如何部署一个通过maven管理的javaweb项目（我随便找了个javaweb项目fork出来：https://github.com/luyongfugx/maventest.git）。
@@ -308,7 +308,7 @@ http://localhost:4000/string
 	
 		
 <span id="advanced"></span>
-## 编写插件支持高级功能
+## Write plugins to support advanced features
 
 部署系统还提供了2种hook,方便我们在构建，部署前后编程做一些特殊的工作（比如我们部署一个web服务的过程中，如果部署时间比较长，为了避免用户访问到正在部署的机器，需要先从nginx中摘掉，等部署完后再把他添加到nginx列表中），在这我们举个例子来做一个示范。
 1.首先我们需要知道如何调试部署平台程序
@@ -396,5 +396,5 @@ class  DeployPlugin1 extends think.service.base {
 export default new DeployPlugin1();
 </pre></code>
 
-我们同样把这个文件放到src/common/service目录下，这样在部署的时候，一开时会调用beforeProject，然后再每台机器部署前后调用beforeMachine,afterMachine方法，最后再调用afterMachine 方法，我们在项目基本信息的时候填写部署hook为deploy_nodejs1_plugin，如果需要每台机器有特殊hook,则在机器基本信息里填写部署hook(这时候部署这台机器时会只执行本hook的beforeMachine,afterMachine方法，不执行项目基本信息里面的beforeMachine,afterMachine方法)
+We also put this file in the src/common/service directory, so that when deploying, it will call beforeProject at the beginning, and then call the beforeMachine and afterMachine methods before and after each machine deployment, and finally call the afterMachine method. We are in the project When filling in the basic information, fill in the deployment hook as deploy_nodejs1_plugin. If you need a special hook for each machine, fill in the deployment hook in the basic information of the machine (at this time, when deploying this machine, only the beforeMachine and afterMachine methods of this hook will be executed, and the project will not be executed. beforeMachine and afterMachine methods in the basic information)
 
